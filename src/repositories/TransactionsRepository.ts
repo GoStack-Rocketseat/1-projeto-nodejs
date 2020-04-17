@@ -18,13 +18,27 @@ class TransactionsRepository {
     this.transactions = [];
   }
 
-  // public all(): Transaction[] {
-  //   // TODO
-  // }
+  public all(): Transaction[] {
+    return this.transactions;
+  }
 
-  // public getBalance(): Balance {
-  //   // TODO
-  // }
+  public getBalance(): Balance {
+    const balance: Balance = {
+      income: 0,
+      outcome: 0,
+      total: 0,
+    };
+
+    this.transactions.map(transaction => {
+      balance.income += transaction.type === 'income' ? transaction.value : 0;
+      balance.outcome += transaction.type === 'outcome' ? transaction.value : 0;
+      balance.total = balance.income - balance.outcome;
+
+      return 0;
+    });
+
+    return balance;
+  }
 
   public create({ title, value, type }: TransactionDTO): Transaction {
     const transaction = new Transaction({
